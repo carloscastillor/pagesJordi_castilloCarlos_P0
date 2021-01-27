@@ -1,0 +1,31 @@
+local Click = hash("touch")
+local pos
+local distance
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	pos = go.get_position()
+	self.actions = {}
+end
+
+function update(self, dt)
+	action = self.actions[Click]
+	if action then 
+		print("click done")
+	end
+	self.actions[Click] = false
+end
+
+function on_message(self, message_id, message, sender)
+
+end
+
+function on_input(self, action_id, action)
+	if action.pressed then 
+		self.actions[action_id] = true
+	end
+end
+
+function on_reload(self)
+
+end
