@@ -1,9 +1,13 @@
 local Click = hash("touch")
 local score
+local scoreUpToTen
+local percentage
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
 	self.score = 0
+	self.scoreUpToTen = 0
+	self.percentage = 0
 	self.actions = {}
 end
 
@@ -13,13 +17,21 @@ function update(self, dt)
 		print("click done")
 		self.score = self.score + 1
 		msg.post("/GUI#Score", "update_score", {score = self.score})
+
+		self.scoreUpToTen = self.scoreUpToTen + 1
+		self.percentage = 100*self.scoreUpToTen
+		msg.post("/GUI#Score", "update_pie", {percentage = self.percentage/10})
 		
 		if self.score ~= 0 and self.score % 10 == 0 then 
 			random_pos = vmath.vector3(math.random(100,800), math.random(100,500), 0)
 			factory.create("#power_up_factory", random_pos) 
 			spawned = false
+			self.scoreUpToTen = 0
+			
 		end
 	end	
+
+	
 	self.actions[Click] = false
 	
 end
