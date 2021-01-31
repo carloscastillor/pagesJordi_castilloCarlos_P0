@@ -1,10 +1,9 @@
 local Click = hash("touch")
-local pos
-local distance
+local score
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
-	pos = go.get_position()
+	self.score = 0
 	self.actions = {}
 end
 
@@ -12,6 +11,8 @@ function update(self, dt)
 	action = self.actions[Click]
 	if action then 
 		print("click done")
+		self.score = self.score + 1
+		msg.post("/GUI#Score", "update_score", {score = self.score})
 	end
 	self.actions[Click] = false
 end
