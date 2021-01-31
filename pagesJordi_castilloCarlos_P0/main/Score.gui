@@ -177,8 +177,8 @@ nodes {
   inherit_alpha: true
   outerBounds: PIEBOUNDS_ELLIPSE
   innerRadius: 0.0
-  perimeterVertices: 10
-  pieFillAngle: 36.0
+  perimeterVertices: 50
+  pieFillAngle: 0.0
   clipping_mode: CLIPPING_MODE_NONE
   clipping_visible: true
   clipping_inverted: false
