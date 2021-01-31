@@ -1,0 +1,2 @@
+prototype: "/main/power_up.go"
+load_dynamically: false
