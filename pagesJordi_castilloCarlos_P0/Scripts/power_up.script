@@ -2,6 +2,7 @@ local timer
 
 function init(self)
 	self.timer = 3
+	sound.play("#spawnSound")
 end
 
 function update(self, dt)

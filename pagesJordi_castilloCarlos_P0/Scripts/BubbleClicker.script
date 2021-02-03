@@ -9,6 +9,7 @@ go.property("minWidth", 0)
 go.property("maxWidth", 0)
 
 function init(self)
+	sound.play("/BackgroundMusic#backgroudMusic")
 	msg.post(".", "acquire_input_focus")
 	self.score = 0
 	self.percentage = 0
@@ -19,6 +20,7 @@ end
 function update(self, dt)
 	action = self.actions[Click]
 	if action then 
+		sound.play("/Bubble#clickSound")
 		updateScore(self)
 	end	
 
