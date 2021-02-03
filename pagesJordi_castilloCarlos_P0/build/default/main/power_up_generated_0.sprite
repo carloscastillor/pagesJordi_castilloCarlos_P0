@@ -1,4 +1,0 @@
-tile_set: "/Assets/game.atlas"
-default_animation: "fist"
-material: "/builtins/materials/sprite.material"
-blend_mode: BLEND_MODE_ALPHA
