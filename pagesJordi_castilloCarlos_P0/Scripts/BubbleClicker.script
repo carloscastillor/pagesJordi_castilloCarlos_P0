@@ -2,11 +2,24 @@ local Click = hash("touch")
 local score
 local percentage
 local scoreUpToTen
+local bubbleBoundaries = {}
+
+bubbleBoundaries.size = {x= 1362 * 0.34, y = 1362 * 0.34}
+bubbleBoundaries.offset = {x = bubbleBoundaries.size.x*0.5, y =bubbleBoundaries.size.y*0.5}
 
 go.property("minHeight", 0)
 go.property("maxHeight", 0)
 go.property("minWidth", 0)
 go.property("maxWidth", 0)
+
+bubbleBoundaries.CheckBoundaries = function (x,y)
+		local pos = go.get_position()
+
+		local isInsideX = (x <= pos.x + bubbleBoundaries.offset.x) and (x >= pos.x - bubbleBoundaries.offset.x)
+		local isInsideY = (y <= pos.y + bubbleBoundaries.offset.y) and (y >= pos.y - bubbleBoundaries.offset.y)
+
+		return isInsideX and isInsideY
+	end
 
 function init(self)
 	sound.play("/BackgroundMusic#backgroudMusic")
@@ -23,7 +36,6 @@ function update(self, dt)
 		sound.play("/Bubble#clickSound")
 		updateScore(self)
 	end	
-
 	
 	self.actions[Click] = false
 	
@@ -37,8 +49,10 @@ function on_message(self, message_id, message, sender)
 end
 
 function on_input(self, action_id, action)
-	if action.pressed then 
-		self.actions[action_id] = true
+	if action.pressed then
+		if bubbleBoundaries.CheckBoundaries(action.x, action.y) then 
+			self.actions[action_id] = true
+		end
 	end
 end
 
